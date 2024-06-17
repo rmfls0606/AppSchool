@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var text = ""
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        List{
+            Label("Hello World", systemImage: "globe")
+            HStack{
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundStyle(Color.accentColor)
+                Text("Hello, world!")
+            }
+            .font(.system(.body, design: .monospaced))
+            TextField("TextField", text: $text)
+            Button("Tap me"){
+                self.text = "You Tapped Me!"
+            }
         }
-        .padding()
     }
 }
 
