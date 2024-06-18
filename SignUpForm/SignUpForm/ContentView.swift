@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 class SignUpFormViewModel: ObservableObject{
     @Published var username: String = ""
@@ -15,7 +16,13 @@ class SignUpFormViewModel: ObservableObject{
     @Published var passwordMessage: String = ""
     @Published var isValid: Bool = false
     
+    private lazy var isUsernameLengthValidPublisher: AnyPublisher<Bool, Never> = {
+        $username.map{ $0.count >= 3}.eraseToAnyPublisher()
+    }()
+    
     init(){
+        isUsernameLengthValidPublisher
+            .assign(to: &$isValid)
         $username.map{ $0.count >= 3 }
             .assign(to: &$isValid)
         $username.map{ $0.count >= 3 ? "" : "Username must be at least three characters!" }
