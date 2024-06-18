@@ -9,8 +9,8 @@ let pizzaOrderPublisher = NotificationCenter.default.publisher(for: .didUpdateOr
                                                                object: pizzaOrder)
 
 pizzaOrderPublisher.sink { notification in
-    print(notification
-    dump(notification))
+    print(notification)
+    dump(notification)
 }
 
 pizzaOrderPublisher.map{ notification in
