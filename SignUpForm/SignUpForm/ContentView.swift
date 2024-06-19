@@ -16,6 +16,12 @@ class SignUpFormViewModel: ObservableObject{
     @Published var passwordMessage: String = ""
     @Published var isValid: Bool = false
     
+    @Published var isUserNameAvailable: Bool = false
+    
+    private let authenticationService = AuthenticationService()
+    
+    private var cancellables: Set<AnyCancellable> = []
+    
     private lazy var isUsernameLengthValidPublisher: AnyPublisher<Bool, Never> = {
         $username.map{ $0.count >= 3}.eraseToAnyPublisher()
     }()
@@ -31,8 +37,8 @@ class SignUpFormViewModel: ObservableObject{
     }()
     
     private lazy var isPasswordValidPublisher: AnyPublisher<Bool, Never> = {
-        Publishers.CombineLatest(isPasswordEmptyPublisher, isPassworMathchingPublisher)
-            .map{ !$0 && $1 }
+        Publishers.CombineLatest3(isPasswordEmptyPublisher, $isUserNameAvailable, isPassworMathchingPublisher)
+            .map{ $0 && $1 && $2}
             .eraseToAnyPublisher()
     }()
     
@@ -42,11 +48,42 @@ class SignUpFormViewModel: ObservableObject{
             .eraseToAnyPublisher()
     }()
     
+    func checkUserNameAvailable(_ userName: String){
+        authenticationService.checkUserNameAvailableWithClousre(userName: userName) { [weak self] result in
+            DispatchQueue.main.async{
+                switch result{
+                case .success(let isAvailable):
+                    self?.isUserNameAvailable = isAvailable
+                case .failure(let error):
+                    print("error: \(error)")
+                    self?.isUserNameAvailable = false
+                }
+            }
+        }
+    }
+    
     init(){
+        //입력이 멈췃을 때 0.5초마다 메인쓰레드에서 보내라
+        $username.debounce(for: 0.5, scheduler: DispatchQueue.main).sink { [weak self] userName in
+            self?.checkUserNameAvailable(userName)
+        }
+        .store(in: &cancellables)
+        
         isUsernameLengthValidPublisher
             .assign(to: &$isValid)
-        $username.map{ $0.count >= 3 ? "" : "Username must be at least three characters!" }
-            .assign(to: &$usernameMessage)
+        
+        Publishers.CombineLatest(isUsernameLengthValidPublisher, $isUserNameAvailable).map{ isUsernameLengthValid, isUserNameAvailable in
+            if !isUsernameLengthValid{
+                return "Username must be at least three characters!"
+            }else if !isUserNameAvailable{
+                return "This username is already taken"
+            }
+            return ""
+        }
+        .assign(to: &$usernameMessage)
+        
+//        $username.map{ $0.count >= 3 ? "" : "Username must be at least three characters!" }
+//            .assign(to: &$usernameMessage)
         Publishers.CombineLatest(isPasswordEmptyPublisher, isPassworMathchingPublisher)
             .map{ isPasswordEmpty, isPasswordMatching in
                 if isPasswordEmpty {
