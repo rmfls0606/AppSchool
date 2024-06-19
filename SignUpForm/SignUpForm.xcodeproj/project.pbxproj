@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		799CAE232C225D91007EE160 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799CAE222C225D91007EE160 /* AuthenticationService.swift */; };
 		79F419002C2169120012DC40 /* SignUpFormApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F418FF2C2169120012DC40 /* SignUpFormApp.swift */; };
 		79F419022C2169120012DC40 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F419012C2169120012DC40 /* ContentView.swift */; };
 		79F419042C2169140012DC40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79F419032C2169140012DC40 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		799CAE222C225D91007EE160 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		79F418FC2C2169120012DC40 /* SignUpForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignUpForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79F418FF2C2169120012DC40 /* SignUpFormApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFormApp.swift; sourceTree = "<group>"; };
 		79F419012C2169120012DC40 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 				79F419012C2169120012DC40 /* ContentView.swift */,
 				79F419032C2169140012DC40 /* Assets.xcassets */,
 				79F419052C2169140012DC40 /* Preview Content */,
+				799CAE222C225D91007EE160 /* AuthenticationService.swift */,
 			);
 			path = SignUpForm;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				799CAE232C225D91007EE160 /* AuthenticationService.swift in Sources */,
 				79F419022C2169120012DC40 /* ContentView.swift in Sources */,
 				79F419002C2169120012DC40 /* SignUpFormApp.swift in Sources */,
 			);
