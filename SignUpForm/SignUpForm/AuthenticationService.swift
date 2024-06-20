@@ -21,6 +21,11 @@ enum NetworkError: Error{
     case encodingError(Error)
 }
 
+enum APIError: LocalizedError{
+    case InvalidRequest
+}
+
+
 class AuthenticationService{
     func checkUserNameAvailableNaive(userName: String) -> AnyPublisher<Bool, Never>{
         guard let url = URL(string: "http://127.0.0.1:8080/isUserNameAvailable?userName=\(userName)") else{
