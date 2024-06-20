@@ -14,6 +14,8 @@
 		79A6FD4B2C23AAF30015938C /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A6FD4A2C23AAF30015938C /* SignUpFormViewModel.swift */; };
 		79A6FD4D2C23AAFF0015938C /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A6FD4C2C23AAFF0015938C /* AuthenticationService.swift */; };
 		79A6FD4F2C23AB510015938C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A6FD4E2C23AB510015938C /* Helper.swift */; };
+		79A6FD512C2408E60015938C /* Publisher+Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A6FD502C2408E60015938C /* Publisher+Dump.swift */; };
+		79A6FD532C240BD40015938C /* Publisher+Retry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A6FD522C240BD40015938C /* Publisher+Retry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		79A6FD4A2C23AAF30015938C /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFormViewModel.swift; sourceTree = "<group>"; };
 		79A6FD4C2C23AAFF0015938C /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		79A6FD4E2C23AB510015938C /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		79A6FD502C2408E60015938C /* Publisher+Dump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Dump.swift"; sourceTree = "<group>"; };
+		79A6FD522C240BD40015938C /* Publisher+Retry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Retry.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 		79A6FD3A2C23AAA80015938C /* SignUpForm2 */ = {
 			isa = PBXGroup;
 			children = (
+				79A6FD502C2408E60015938C /* Publisher+Dump.swift */,
+				79A6FD522C240BD40015938C /* Publisher+Retry.swift */,
 				79A6FD3B2C23AAA80015938C /* SignUpForm2App.swift */,
 				79A6FD3D2C23AAA80015938C /* ContentView.swift */,
 				79A6FD4A2C23AAF30015938C /* SignUpFormViewModel.swift */,
@@ -148,7 +154,9 @@
 			files = (
 				79A6FD3E2C23AAA80015938C /* ContentView.swift in Sources */,
 				79A6FD3C2C23AAA80015938C /* SignUpForm2App.swift in Sources */,
+				79A6FD512C2408E60015938C /* Publisher+Dump.swift in Sources */,
 				79A6FD4F2C23AB510015938C /* Helper.swift in Sources */,
+				79A6FD532C240BD40015938C /* Publisher+Retry.swift in Sources */,
 				79A6FD4B2C23AAF30015938C /* SignUpFormViewModel.swift in Sources */,
 				79A6FD4D2C23AAFF0015938C /* AuthenticationService.swift in Sources */,
 			);

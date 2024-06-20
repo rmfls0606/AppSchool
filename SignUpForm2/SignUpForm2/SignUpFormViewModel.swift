@@ -4,6 +4,12 @@
 //
 //  Created by 이상민 on 6/20/24.
 //
+//
+//  SignUpFormViewModel.swift
+//  SignUpForm2
+//
+//  Created by Jungman Bae on 6/20/24.
+//
 
 import Foundation
 import Combine
@@ -21,8 +27,6 @@ class SignUpFormViewModel: ObservableObject {
     private lazy var isUsernameAvailablePublisher: AnyPublisher<Available, Never> = {
         $username
             .debounce(for: 0.5, scheduler: RunLoop.main)
-            //같은 문자열이 2번 서버에 보내지지 않도록 필터링
-
             .removeDuplicates()
             .flatMap { username -> AnyPublisher<Available,Never> in
                 self.authenticationService.checkUserNameAvailablePubliser(userName: username)
@@ -30,7 +34,6 @@ class SignUpFormViewModel: ObservableObject {
             }
             .receive(on: DispatchQueue.main)
             .print("before share")
-            //서버 코드가 들어가있어서 ≈ 공유하는게 좋긴 때문에 share로 선언
             .share()
             .print("share")
             .eraseToAnyPublisher()
@@ -41,7 +44,10 @@ class SignUpFormViewModel: ObservableObject {
             switch result {
             case .success(let isAvailable):
                 return isAvailable
-            case .failure(_):
+            case .failure(let error):
+                if case APIError.transportError(_) = error {
+                    return true
+                }
                 return false
             }
         }
@@ -52,9 +58,28 @@ class SignUpFormViewModel: ObservableObject {
             case .success(let isAvailable):
                 return isAvailable ? "" : "This username is not available."
             case .failure(let error):
+                if case APIError.transportError(_) = error {
+                    return ""
+                }
+                else if case APIError.validationError(let reason) = error {
+                    return reason
+                }
+                else if case APIError.serverError(statusCode: _, reason: let reason, retryAfter: _) = error {
+                    return reason ?? "Server error"
+                }
                 return error.localizedDescription
             }
         }
         .assign(to: &$usernameMessage)
+        
+        isUsernameAvailablePublisher.map { result in
+            if case .failure(let error) = result {
+                if case APIError.decodingError = error {
+                    return true
+                }
+            }
+            return false
+        }
+        .assign(to: &$showUpdateDialog)
     }
 }
