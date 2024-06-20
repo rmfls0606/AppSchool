@@ -12,4 +12,6 @@ class SignUpFormViewModel: ObservableObject{
     @Published var usernameMessage: String = ""
     @Published var isValid: Bool = false
     @Published var showUpdateDialog: Bool = false
+    
+    
 }
