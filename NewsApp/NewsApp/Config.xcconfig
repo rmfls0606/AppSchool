@@ -1,0 +1,12 @@
+//
+//  Config.xcconfig
+//  NewsApp
+//
+//  Created by 이상민 on 6/21/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+CLIENT_ID = aS34cOyyS68b4PigyBi3
+CLIENT_SECRET = 0QDKVk1WxO
